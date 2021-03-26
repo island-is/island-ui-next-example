@@ -1,34 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## ⚠️ Disclaimer! The @island.is/ui library is not officially release and is only available as an alpha version at the moment. We are going to improve it and provide a better support in the future. Proceed with cautious, things might break.
 
-## Getting Started
+## Setup
 
-First, run the development server:
+1. Create a new next app
 
 ```bash
-npm run dev
-# or
+npx create-next-app
+```
+
+2. Set up TypeScript
+
+```bash
+touch tsconfig.json
+yarn add --dev typescript @types/react @types/node
+```
+
+3. Install `@island.is/ui`
+
+```bash
+yarn add @island.is/ui -E
+```
+
+Install its required peerDependencies
+
+```bash
+yarn add @rehooks/component-size animejs classnames date-fns downshift hypher lodash markdown-to-jsx react react-animate-height react-datepicker react-dropzone react-keyed-flatten-children react-select react-toastify react-use reakit treat@1.6.0 -E
+```
+
+> Make sure to install `treat@1.6.0`. It won't work with treat@2.
+
+4. Configure `next.config.js`
+
+We need to use specific versions of `webpack` and `next` that are supported by Treat.
+
+```bash
+yarn add next@10.0.1 -E
+yarn add webpack@4.44.1 next-treat next-transpile-modules -DE
+```
+
+Create a `next.config.js` at the root of the project and add the following.
+
+```javascript
+const withTreat = require('next-treat')();
+const withTM = require('next-transpile-modules')(['@island.is/ui']);
+
+module.exports = withTreat(withTM());
+```
+
+5. Run the development server
+
+```bash
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You can now open `http://localhost:3000`
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+6. Voilà!
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![preview](https://user-images.githubusercontent.com/937328/112627694-d7304400-8e29-11eb-8cac-1f5a6aab7cac.jpg)
